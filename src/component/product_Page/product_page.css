@@ -1,0 +1,91 @@
+.productcontainer{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding-top: 200px;
+    padding-left: 20px;
+     padding-right: 20px;
+}
+
+body{
+    width:100%;
+    height: 100%;
+    background-color: rgb(228, 183, 142);
+}
+
+img{
+    width: 90%;
+    height: 40vh;
+    object-fit: cover;
+}
+
+.product{
+   
+    border: 2px solid black;
+    grid-auto-columns: minmax(200px, auto);
+    align-items: stretch;
+     height: 100%;
+     display: flex;
+     flex-direction: column;
+     border-radius: 15px;
+     background-color:  rgb(218, 201, 189);
+     word-break: keep-all
+    
+}
+
+.subproduct{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 25px;
+    width: 100%;
+    padding: 0px;
+   
+}
+
+.product img{
+    padding: 10px;
+   
+}
+
+.product h2{
+ text-align: center;         
+  padding: 10px;        
+  white-space: normal;      
+  word-wrap: break-word;     
+  overflow-wrap: break-word;
+}
+
+.subproductdetail{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.product-detail{
+    display: flex;
+    flex-direction: row;
+}
+
+.product-detail img{
+    width: 40%;
+    height: 100%;
+    padding: 10px;
+}
+
+.product-detail button{
+    width: 10%;
+}
+.product-detail p{
+    max-width: 80%;
+    font-size: large;
+}
+
+.title{
+    text-align: center;
+    font-size: 30px;
+    font-weight:bolder;
+    font-family:'Times New Roman', Times, serif
+}
