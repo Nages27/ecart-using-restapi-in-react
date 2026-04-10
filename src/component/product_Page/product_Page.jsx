@@ -1,4 +1,3 @@
-
 import {useEffect,useMemo} from 'react';
 import { setProduct } from "../../redux/productslice";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,13 +5,16 @@ import './product_page.css';
 import {useNavigate} from 'react-router-dom';
 import { Button } from '@mui/material';
 import Popup from './popup';
-import { isOpen } from '../../redux/popupslice';
+import { openpopup } from '../../redux/popupslice';
+
 
 function Product(){
-
+  
+  
     const dispatch=useDispatch();
     const details=useSelector((state)=>state.task.items);
     const navigate=useNavigate();
+
      useEffect(() => {
         fetch('https://dummyjson.com/products') 
           .then(response => response.json())
@@ -21,26 +23,17 @@ function Product(){
           })
       }, []); 
 
-
-      // useEffect(() => {
-      //         fetch('https://dummyjson.com/products') 
-      //           .then(response => response.json())
-      //           .then(data => {
-      //             dispatch(addedProduct(data.products)); 
-      //           })
-      //       }, [details]); 
-      
       const data=useMemo(()=>{
         return details.map((t)=>(
           <div key={t.id}>
           <div className='product'>
           <div onClick={()=>navigate(`/ProductDetail/${t.id}`)} style={{cursor:"pointer"}}>
-          {/* <img src={t.images[0] }/> */}
+          <img src={t.images[0] }/>
           <h2>Name:{t.title}</h2>
-          {/* <div className='subproduct'>
+          <div className='subproduct'>
           <h5>Price:{t.price}</h5>
           <h5>Rating:{t.rating}</h5>
-          </div> */}
+          </div>
           </div>
           </div>    
           </div>  
@@ -49,7 +42,8 @@ function Product(){
 
 
    const handleAddproduct=()=>{
-    dispatch(isOpen());
+    dispatch(openpopup());
+
   };
   
       return(

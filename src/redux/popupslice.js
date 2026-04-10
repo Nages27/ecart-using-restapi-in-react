@@ -1,15 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// export interface Product{
+//   title:String;
+//   description:String;
+  
+
+// }
 const popup=createSlice({
     name:"popup",
     initialState:{
         isOpen:false,
-        tempdata:null
+        tempdata:null,
+        update:false
 
     },
     reducers:{
-      isOpen:(state)=>{
+      openpopup:(state)=>{
         state.isOpen=true;
+          state.tempdata = null; 
+          state.update=false;
       },
 
       closePopup:(state)=>{
@@ -21,10 +30,13 @@ const popup=createSlice({
 
       },
           update:(state,action)=>{
+          state.isOpen = true;
           state.tempdata=action.payload;
+          state.update=true;
+
       }
     }
 });
 
-export const{isOpen,closePopup,save,update}=popup.actions;
+export const{openpopup,update,save,closePopup}=popup.actions;
 export default popup.reducer;

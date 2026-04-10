@@ -89,3 +89,15 @@ img{
     font-weight:bolder;
     font-family:'Times New Roman', Times, serif
 }
+.popup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.bt{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
