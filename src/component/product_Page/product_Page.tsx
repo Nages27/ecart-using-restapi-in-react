@@ -5,14 +5,13 @@ import './product_page.css';
 import {useNavigate} from 'react-router-dom';
 import { Button } from '@mui/material';
 import Popup from './popup';
-import { openpopup } from '../../redux/popupslice';
-
+import { open } from '../../redux/popupslice';
+import { RootState } from "../../redux/store";
 
 function Product(){
   
-  
     const dispatch=useDispatch();
-    const details=useSelector((state)=>state.task.items);
+    const details=useSelector((state:RootState)=>state.task.items);
     const navigate=useNavigate();
 
      useEffect(() => {
@@ -28,7 +27,7 @@ function Product(){
           <div key={t.id}>
           <div className='product'>
           <div onClick={()=>navigate(`/ProductDetail/${t.id}`)} style={{cursor:"pointer"}}>
-          <img src={t.images[0] }/>
+          <img src={t.image?.[0] }/>
           <h2>Name:{t.title}</h2>
           <div className='subproduct'>
           <h5>Price:{t.price}</h5>
@@ -42,7 +41,7 @@ function Product(){
 
 
    const handleAddproduct=()=>{
-    dispatch(openpopup());
+    dispatch(open());
 
   };
   

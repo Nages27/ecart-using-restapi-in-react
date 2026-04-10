@@ -6,18 +6,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { closePopup, save } from "../../redux/popupslice";
 import { useState,useEffect } from "react";
 import { addedProduct, updateProduct } from "../../redux/productslice";
+import { RootState } from "../../redux/store";
+
+interface Product{
+  id:string;
+  title:string;
+  description:string;
+  rating:string;
+  price:string;
+  discountPercentage:string;
+  warrantyInformation:string;
+  availabilityStatus:string;
+  category:string;
+  image:string
+}
 
 function Popup() {
 
   const dispatch = useDispatch();
   // const [open, setOpen] = useState(false)
 
-  const isOpen = useSelector((state) => state.pop.isOpen);
-  const product = useSelector((state) => state.pop.tempdata);
-  const isUpdate =useSelector((state)=>state.pop.update);
+  const isOpen = useSelector((state : RootState) => state.pop.isOpen);
+  const product = useSelector((state : RootState) => state.pop.tempdata);
+  const isUpdate =useSelector((state : RootState)=>state.pop.update);
    
   
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState<Partial<Product>>({});
 
   const handleClose = () => {
     dispatch(closePopup());
@@ -25,7 +39,7 @@ function Popup() {
     setForm({});
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value}));
   };
@@ -45,7 +59,7 @@ function Popup() {
           category: form.category ?? product.category,
           warrantyInformation: form.warrantyInformation ?? product.warrantyInformation,
           availabilityStatus: form.availabilityStatus ?? product.availabilityStatus,
-          images: [form.images ?? product.images?.[0]]
+          images: [form.image ?? product.image ?.[0]]
         })
       })
         .then(res => res.json())
@@ -70,7 +84,7 @@ function Popup() {
           category: form.category,
           warrantyInformation: form.warrantyInformation,
           availabilityStatus: form.availabilityStatus,
-          images: [form.images]
+          images: [form.image]
         })
       })
         .then(res => res.json())
@@ -85,7 +99,7 @@ function Popup() {
   };
 
   return (
-    <Dialog open={isOpen} onClose={handleClose} key={product?.id}>
+    <Dialog open={isOpen} onClose={handleClose} >
 
       <DialogTitle>
         {isUpdate ? "Update Product" : "Add Product"}
@@ -160,7 +174,7 @@ function Popup() {
           <TextField
             name="images"
             label="Image URL"
-            value={form.images ?? product?.images?.[0] ?? ""}
+            value={form.image ?? product?.image ?.[0] ?? ""}
             onChange={handleChange}
             fullWidth
             margin="dense"
