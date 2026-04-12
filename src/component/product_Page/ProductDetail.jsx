@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import Popup from './component/product_Page/popup';
+import Popup from './popup';
 import { update } from '../../redux/popupslice';
 
 
