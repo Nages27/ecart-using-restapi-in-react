@@ -1,5 +1,5 @@
 import {  configureStore } from "@reduxjs/toolkit";
-import taskReducer from "./productslice";
+import taskReducer from "./productSlice";
 import popup from "./popupslice";
 
 const store=configureStore({
