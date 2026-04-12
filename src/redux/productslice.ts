@@ -1,3 +1,4 @@
+
 import {createSlice} from '@reduxjs/toolkit';
 import { PayloadAction } from "@reduxjs/toolkit";
 
@@ -11,18 +12,16 @@ import { PayloadAction } from "@reduxjs/toolkit";
   warrantyInformation:string;
   availabilityStatus:string;
   category:string;
-  image:string
+  images:string[];
 }
 
 interface ProductState{
   items:Product[];
 }
 
-const saved = localStorage.getItem("productitems");
-const initialProduct:Product[]=saved ? JSON.parse(saved) : [];
 
 const initialState:ProductState={
-  items:initialProduct,
+  items:[],
 }
 
 
@@ -32,11 +31,17 @@ const product=createSlice({
     reducers:{
         setProduct:(state,action)=>{
             state.items=action.payload;
-            localStorage.setItem("productitems", JSON.stringify(state.items));
+            // localStorage.setItem("productitems", JSON.stringify(state.items));
         },
         addedProduct:(state,action)=>{
-            state.items.push(action.payload);
-            localStorage.setItem("productitems", JSON.stringify(state.items));
+            
+           const existing = JSON.parse(localStorage.getItem("productitems") || "[]");
+
+    localStorage.setItem(
+        "productitems",
+        JSON.stringify([...existing, action.payload])
+    );
+
         },
         updateProduct: (state, action:PayloadAction<Product>) => {
   state.items = state.items.map((items) =>
