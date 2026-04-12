@@ -10,7 +10,7 @@ export interface Product{
   warrantyInformation:string;
   availabilityStatus:string;
   category:string;
-  image:string
+  images:string[];
 }
 
 interface popup{
@@ -29,7 +29,7 @@ id: "",
   warrantyInformation: "",
   availabilityStatus: "",
   category: "",
-  image: ""
+  images: []
 }
 const initialState : popup ={
   isOpen:false,
